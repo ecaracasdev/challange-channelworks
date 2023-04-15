@@ -32,6 +32,8 @@ describe('GET /', () => {
       id: '1',
       fullname: 'John Doe',
       active: true,
+      assets: [],
+      licenses: [],
     };
     const res = await request(app)
       .post('/developers')
@@ -47,15 +49,19 @@ describe('GET /', () => {
     developerId = developer.id;
   });
 
-  it('should set a developer as inactive', async () => {
+  it('should set a developer as inactive and remove their assets and licenses', async () => {
     const res = await request(app)
       .patch(`/developers/${developerId}`)
       .set('Authorization', `Bearer ${jwtToken}`);
 
     // Make assertions on the response
     expect(res.status).toEqual(200);
-    expect(res.body.message).toEqual('Developer set as inactive');
+    expect(res.body.message).toEqual(
+      'Developer set as inactive and their assets and licenses removed'
+    );
     expect(res.body.developer.active).toEqual(false);
+    expect(res.body.developer.assets).toEqual([]);
+    expect(res.body.developer.licenses).toEqual([]);
   });
 
   it('should return a 404 if developer not found', async () => {
@@ -137,7 +143,7 @@ describe('GET /', () => {
   it('should create a new license', async () => {
     const newLicense = {
       id: '5',
-      software: 'HP'
+      software: 'HP',
     };
     const res = await request(app)
       .post('/licenses')
@@ -185,7 +191,7 @@ describe('GET /', () => {
       .set('Authorization', `Bearer ${jwtToken}`);
     expect(res.statusCode).toEqual(200);
     expect(res.body).toHaveProperty('licenses');
-    expect(res.body.licenses).toHaveLength(4);
+    expect(res.body.licenses).toHaveLength(2);
   });
 
   it('should return 401 error when not authenticated', async () => {
@@ -193,5 +199,4 @@ describe('GET /', () => {
     expect(res.statusCode).toEqual(401);
     expect(res.body.message).toEqual('Unauthorized');
   });
-
 });

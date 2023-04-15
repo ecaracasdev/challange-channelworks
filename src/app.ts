@@ -27,16 +27,16 @@ interface License {
 
 // Sample data for the licenses
 const licenses: License[] = [
-  { id: '1', software: 'Dell' },
-  { id: '2', software: 'Logitech' },
-  { id: '3', software: 'Logitech' },
-  { id: '4', software: 'Bose' },
+  { id: '1', software: 'amazon' },
+  { id: '2', software: 'azure' },
 ];
 
 interface Developer {
   id: string | number;
   fullname: string;
   active: boolean;
+  assets: Asset[];
+  licenses: License[];
 }
 
 const developers: Developer[] = [];
@@ -116,8 +116,8 @@ app.get(
 
 // Create a new developer and automatically
 app.post('/developers', authenticateUser, (req: Request, res: Response) => {
-  const { id, fullname, active } = req.body;
-  const developer: Developer = { id, fullname, active };
+  const { id, fullname, active, assets = [], licenses = [] } = req.body;
+  const developer: Developer = { id, fullname, active, assets, licenses };
   developers.push(developer);
   res.status(201).json({ message: 'Developer added successfully', developer });
 });
@@ -131,8 +131,14 @@ app.patch(
     const index = developers.findIndex((developer) => developer.id === id);
     if (index !== -1) {
       developers[index].active = false;
+
+      // Remove developer's assets and licenses
+      developers[index].assets = [];
+      developers[index].licenses = [];
+
       res.json({
-        message: 'Developer set as inactive',
+        message:
+          'Developer set as inactive and their assets and licenses removed',
         developer: developers[index],
       });
     } else {
@@ -140,6 +146,48 @@ app.patch(
     }
   }
 );
+
+// Endpoint to update assets and licenses
+app.put('/developers/:id/assets-licenses', authenticateUser, (req, res) => {
+  const { id } = req.params;
+  const { type, operation, value } = req.body;
+  const developer = developers.find((d) => d.id === id);
+
+  if (!developer) {
+    return res.status(404).json({ message: 'Developer not found' });
+  }
+
+  if (type === 'asset') {
+    if (operation === 'add') {
+      developer.assets.push(value);
+    } else if (operation === 'remove') {
+      const assetIndex = developer.assets.findIndex((a) => a.id === value);
+      if (assetIndex !== -1) {
+        developer.assets.splice(assetIndex, 1);
+      }
+    } else if (operation === 'replace') {
+      developer.assets = value;
+    }
+  } else if (type === 'license') {
+    if (operation === 'add') {
+      developer.licenses.push(value);
+    } else if (operation === 'remove') {
+      const licenseIndex = developer.licenses.findIndex((l) => l.id === value);
+      if (licenseIndex !== -1) {
+        developer.licenses.splice(licenseIndex, 1);
+      }
+    } else if (operation === 'replace') {
+      developer.licenses = value;
+    }
+  } else {
+    return res.status(400).json({ message: 'Invalid type' });
+  }
+
+  return res.status(200).json({
+    message: `Developer ${type}s updated successfully`,
+    developer,
+  });
+});
 
 // Create a new asset
 app.post('/assets', authenticateUser, (req, res) => {
