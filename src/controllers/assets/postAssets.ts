@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import AssetModel, { IAsset } from '../../models/assets';
 
+
 const controller = async (req: Request, res: Response): Promise<void> => {
   try {
     const { brand, model, type }: IAsset = req.body;

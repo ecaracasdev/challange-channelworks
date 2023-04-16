@@ -3,18 +3,22 @@ import bodyParser from 'body-parser';
 import router from './routes';
 import dotenv from 'dotenv-safe';
 import DBManager from './managers/db.manager';
+import swaggerJSDoc from 'swagger-jsdoc';
+import swaggerUi from 'swagger-ui-express';
+import { options } from './swagger';
 
 dotenv.config();
 
 const app = express();
 app.use(bodyParser.json());
-const PORT = 3000;
+
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerJSDoc(options)));
 
 app.use('/api', router);
 
-const server = app.listen(PORT, async () => {
+const server = app.listen(process.env.PORT, async () => {
   await DBManager.connect();
-  console.log(`Server running on port ${PORT}`);
+  console.log(`Server running on port ${process.env.PORT}`);
 });
 
 const closeServer = () => {
