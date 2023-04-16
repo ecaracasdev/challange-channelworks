@@ -1,7 +1,7 @@
 import express from 'express';
 import listAssets from '../controllers/assets/listAssets';
-import postAssets from '../controllers/assets/listAssets';
-import deleteAssets from '../controllers/assets/listAssets';
+import postAssets from '../controllers/assets/postAssets';
+import deleteAssets from '../controllers/assets/deleteAssets';
 
 const router = express.Router();
 

@@ -1,13 +1,17 @@
 import { Request, Response } from 'express';
-import { License, licenses } from '../../models/licenses';
+import License from '../../models/licenses';
 
-const controller = (req: Request, res: Response) => {
-  const { id, software }: License = req.body;
-  const newLicense: License = { id, software };
-  licenses.push(newLicense);
-  res
-    .status(201)
-    .json({ message: 'license added successfully', license: newLicense });
+const controller = async (req: Request, res: Response) => {
+  try {
+    const { id, software } = req.body;
+
+    const license = new License({ id, software });
+    await license.save();
+
+    res.status(201).json({ message: 'License added successfully', license });
+  } catch (error) {
+    res.status(500).json({ message: 'Error adding license', error });
+  }
 };
 
 export default controller;

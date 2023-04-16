@@ -1,14 +1,20 @@
 import { Request, Response } from 'express';
-import { AssetType, Asset, assets } from '../../models/assets';
+import AssetModel from '../../models/assets';
 
-const controller = (req: Request, res: Response) => {
+const controller = async (req: Request, res: Response) => {
   const { id } = req.params;
-  const index = assets.findIndex((asset) => asset.id === id);
-  if (index === -1) {
-    return res.status(404).json({ error: 'Asset not found' });
+  try {
+    const deletedAsset = await AssetModel.findByIdAndDelete(id);
+
+    if (!deletedAsset) {
+      return res.status(404).json({ error: 'Asset not found' });
+    }
+
+    res.json({ message: 'Asset deleted successfully' });
+  } catch (error: any) {
+    console.error(error.message);
+    res.status(500).json({ error: 'Failed to delete asset' });
   }
-  assets.splice(index, 1);
-  res.json({ message: 'Asset deleted successfully' });
 };
 
 export default controller;

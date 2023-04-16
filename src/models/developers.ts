@@ -1,12 +1,26 @@
-import { assets, Asset } from "./assets";
-import { License } from "./licenses";
+import mongoose from 'mongoose';
 
-export interface Developer {
+export interface IDeveloper extends mongoose.Document {
   id: string | number;
   fullname: string;
   active: boolean;
-  assets: Asset[];
-  licenses: License[];
+  assets: string[];
+  licenses: string[];
 }
 
-export const developers: Developer[] = [];
+const DeveloperSchema = new mongoose.Schema(
+  {
+    fullname: { type: String, required: true },
+    active: { type: Boolean, default: true },
+    assets: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Asset' }],
+    licenses: [{ type: mongoose.Schema.Types.ObjectId, ref: 'License' }],
+  },
+  {
+    versionKey: false,
+    timestamps: true,
+  }
+);
+
+const DeveloperModel = mongoose.model<IDeveloper>('Developer', DeveloperSchema);
+
+export default DeveloperModel;

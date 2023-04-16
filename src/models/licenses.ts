@@ -1,10 +1,19 @@
-export interface License {
-  id: string | number;
+import mongoose, { Document } from 'mongoose';
+
+export interface ILicense extends Document {
   software: string;
 }
 
-// Sample data for the licenses
-export const licenses: License[] = [
-  { id: '1', software: 'amazon' },
-  { id: '2', software: 'azure' },
-];
+export const licenseSchema = new mongoose.Schema(
+  {
+    software: { type: String, required: true },
+  },
+  {
+    timestamps: true,
+    versionKey: false,
+  }
+);
+
+const LicenseModel = mongoose.model<ILicense>('License', licenseSchema);
+
+export default LicenseModel;

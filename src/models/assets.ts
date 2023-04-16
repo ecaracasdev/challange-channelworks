@@ -1,17 +1,25 @@
+import mongoose from 'mongoose';
+
 // assets.ts
 export type AssetType = 'laptop' | 'keyboard' | 'mouse' | 'headset';
 
-export interface Asset {
-  id: string | number;
+export interface IAsset {
   brand: string;
   model: string;
   type: AssetType;
 }
 
-// Sample data for the assets
-export const assets: Asset[] = [
-  { id: '1', brand: 'Dell', model: 'Latitude 7400', type: 'laptop' },
-  { id: '2', brand: 'Logitech', model: 'K840', type: 'keyboard' },
-  { id: '3', brand: 'Logitech', model: 'MX Master 3', type: 'mouse' },
-  { id: '4', brand: 'Bose', model: 'QuietComfort 35 II', type: 'headset' },
-];
+export const assetSchema = new mongoose.Schema(
+  {
+    brand: { type: String, required: true },
+    model: { type: String, required: true },
+    type: { type: String, required: true },
+  },
+  {
+    timestamps: true,
+    versionKey: false,
+  }
+);
+const AssetModel = mongoose.model<IAsset>('Asset', assetSchema);
+
+export default AssetModel;

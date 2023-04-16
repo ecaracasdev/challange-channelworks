@@ -1,14 +1,22 @@
 import { Request, Response } from 'express';
-import { licenses } from '../../models/licenses';
+import LicenseModel from '../../models/licenses';
 
-const controller = (req: Request, res: Response) => {
-  const { id } = req.params;
-  const index = licenses.findIndex((license) => license.id === id);
-  if (index === -1) {
-    return res.status(404).json({ error: 'license not found' });
+const controller = async (req: Request, res: Response) => {
+  try {
+    const { id } = req.params;
+    const license = await LicenseModel.findById(id);
+
+    if (!license) {
+      return res.status(404).json({ error: 'License not found' });
+    }
+    const result = await LicenseModel.deleteOne({ _id: id });
+
+    if (result.deletedCount === 1) {
+      res.json({ message: 'License deleted successfully' });
+    }
+  } catch (error) {
+    res.status(500).json({ message: 'Error deleting license', error });
   }
-  licenses.splice(index, 1);
-  res.json({ message: 'license deleted successfully' });
 };
 
 export default controller;
