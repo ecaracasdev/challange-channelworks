@@ -1,7 +1,10 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import router from './routes';
+import dotenv from 'dotenv-safe';
 import DBManager from './managers/db.manager';
+
+dotenv.config();
 
 const app = express();
 app.use(bodyParser.json());
