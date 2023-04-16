@@ -1,10 +1,15 @@
 import { Request, Response } from 'express';
 import Developer from '../../models/developers';
+import { isValidObjectId } from '../../utils/validation';
 
 const controller = async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
 
+    if (!isValidObjectId(id)) {
+      // validate the id parameter
+      return res.status(400).json({ error: 'Invalid Asset ID' });
+    }
     const developer = await Developer.findOneAndUpdate(
       { _id: id },
       { active: false, assets: [], licenses: [] }

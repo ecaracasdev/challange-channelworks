@@ -1,8 +1,14 @@
 import { Request, Response } from 'express';
 import AssetModel from '../../models/assets';
+import { isValidObjectId } from '../../utils/validation';
 
 const controller = async (req: Request, res: Response) => {
   const { id } = req.params;
+
+  if (!isValidObjectId(id)) {
+    // validate the id parameter
+    return res.status(400).json({ error: 'Invalid Asset ID' });
+  }
   try {
     const deletedAsset = await AssetModel.findByIdAndDelete(id);
 

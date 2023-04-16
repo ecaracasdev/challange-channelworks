@@ -2,6 +2,7 @@ import { Request, Response } from 'express';
 import Developer from '../../models/developers';
 import Asset from '../../models/assets';
 import License from '../../models/licenses';
+import { isValidObjectId } from '../../utils/validation';
 
 interface OperationValue {
   assetId: string;
@@ -18,6 +19,11 @@ const controller = async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
     const { type, operation, value } = req.body as OperationRequestBody;
+
+    if (!isValidObjectId(id)) {
+      // validate the id parameter
+      return res.status(400).json({ error: 'Invalid Asset ID' });
+    }
 
     const developer = await Developer.findOne({ _id: id, active: true });
     if (!developer) {
