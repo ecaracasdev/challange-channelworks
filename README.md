@@ -23,30 +23,28 @@ Before proceeding with the installation, make sure you have the following tools 
 
 Follow these steps to run the app locally:
 
-Clone the repository:
+### 1. Clone the repository:
 ```
 git clone https://github.com/ecaracasdev/challange-channelworks.git
 ```
-Copy
 
-## Navigate to the project directory:
+### 2. Navigate to the project directory:
 ```
 cd challange-channelworks
 ```
-Copy
 
-Create a .env file based on .env.example:
-
+### 3. Create a .env file based on .env.example:
+```
 cp .env.example .env
+```
 
-Copy
-Update the variables in the .env file with the appropriate values.
+### 4. Update the variables in the .env file with the appropriate values.
 
-Start the application using docker-compose:
-
+### 5. Start the application using docker-compose:
+```
 docker-compose up --build
+```
 
-Copy
 This command will build and start the container instances defined in docker-compose.yml file. Once the build process is complete, you should be able to access the application by navigating to http://localhost:[PORT_NUMBER] in your web browser.
 
 Usage
