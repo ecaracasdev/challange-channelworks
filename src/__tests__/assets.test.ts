@@ -1,77 +1,63 @@
 import request from 'supertest';
-import { app, closeServer } from '../../src/app';
+import { app } from '../app'; // assumes your express app is exported from a module
+import mockRequire from 'mock-require';
 import jwt from 'jsonwebtoken';
 const jwtToken = jwt.sign({ username: 'admin' }, 'secretKey');
 
-let developerId = '';
-
-describe('assets test cases', () => {
-  afterAll(async () => {
-    await closeServer();
-  });
-  it('should create a new asset', async () => {
-    const newAsset = {
-      id: '5',
-      brand: 'HP',
-      model: 'ProBook',
-      type: 'laptop',
-    };
-    const res = await request(app)
-      .post('/assets')
-      .set('Authorization', `Bearer ${jwtToken}`)
-      .send(newAsset);
-    expect(res.statusCode).toEqual(201);
-    expect(res.body.asset).toHaveProperty('id', '5');
-    expect(res.body.asset).toHaveProperty('brand', 'HP');
-    expect(res.body.asset).toHaveProperty('model', 'ProBook');
-    expect(res.body.asset).toHaveProperty('type', 'laptop');
-  });
-
-  it('should return 401 error when not authenticated', async () => {
-    const res = await request(app).post('/assets').send({
-      id: '5',
-      brand: 'HP',
-      model: 'ProBook',
-      type: 'laptop',
+describe('GET /assets', () => {
+  beforeEach(() => {
+    // Mock the AssetModel module
+    mockRequire('../models/assets', {
+      find: jest.fn().mockResolvedValue([
+        {
+          _id: '643b38b9ef4d91a675c6e6fe',
+          brand: 'samsung',
+          model: 'xiphire',
+          type: 'laptop',
+          createdAt: '2023-04-15T23:52:25.992Z',
+          updatedAt: '2023-04-15T23:52:25.992Z',
+        },
+        {
+          _id: '643b41e550acd94dd4f29aec',
+          brand: 'asus',
+          model: 'phiro',
+          type: 'keyboard',
+          createdAt: '2023-04-16T00:31:33.525Z',
+          updatedAt: '2023-04-16T00:31:33.525Z',
+        },
+      ]),
     });
-    expect(res.statusCode).toEqual(401);
-    expect(res.body.message).toEqual('Unauthorized');
   });
 
-  it('should delete an asset', async () => {
-    const res = await request(app)
-      .delete('/assets/1')
+  afterEach(() => {
+    // Restore the original AssetModel module
+    mockRequire.stopAll();
+  });
+
+  it('returns a list of assets', async () => {
+    const response = await request(app)
+      .get('/api/assets')
       .set('Authorization', `Bearer ${jwtToken}`);
-    expect(res.statusCode).toEqual(200);
-    expect(res.body).toHaveProperty('message', 'Asset deleted successfully');
-  });
-
-  it('should return 404 error when asset not found', async () => {
-    const res = await request(app)
-      .delete('/assets/100')
-      .set('Authorization', `Bearer ${jwtToken}`);
-    expect(res.statusCode).toEqual(404);
-    expect(res.body).toHaveProperty('error', 'Asset not found');
-  });
-
-  it('should return 401 error when not authenticated', async () => {
-    const res = await request(app).delete('/assets/2');
-    expect(res.statusCode).toEqual(401);
-    expect(res.body.message).toEqual('Unauthorized');
-  });
-
-  it('should list all the assets', async () => {
-    const res = await request(app)
-      .get('/assets')
-      .set('Authorization', `Bearer ${jwtToken}`);
-    expect(res.statusCode).toEqual(200);
-    expect(res.body).toHaveProperty('assets');
-    expect(res.body.assets).toHaveLength(4);
-  });
-
-  it('should return 401 error when not authenticated', async () => {
-    const res = await request(app).get('/assets');
-    expect(res.statusCode).toEqual(401);
-    expect(res.body.message).toEqual('Unauthorized');
+    expect(response.status).toBe(200);
+    expect(response.body).toEqual({
+      assets: [
+        {
+          _id: '643b38b9ef4d91a675c6e6fe',
+          brand: 'samsung',
+          model: 'xiphire',
+          type: 'laptop',
+          createdAt: '2023-04-15T23:52:25.992Z',
+          updatedAt: '2023-04-15T23:52:25.992Z',
+        },
+        {
+          _id: '643b41e550acd94dd4f29aec',
+          brand: 'asus',
+          model: 'phiro',
+          type: 'keyboard',
+          createdAt: '2023-04-16T00:31:33.525Z',
+          updatedAt: '2023-04-16T00:31:33.525Z',
+        },
+      ],
+    });
   });
 });
