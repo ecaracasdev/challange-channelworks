@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "tsc && node dist/app.js",
+    "start": "tsc && node dist/index.js",
     "dev": "ts-node-dev --respawn src/index.ts",
     "build": "tsc",
     "test": "jest  --detectOpenHandles",

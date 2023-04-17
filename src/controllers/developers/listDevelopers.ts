@@ -16,11 +16,13 @@ const controller = async (req: Request, res: Response) => {
   const developers = await Developer.find({})
     .populate('assets', '_id brand model type')
     .populate('licenses', '_id software');
+    
 
-  if (developers.length === 0) return errorMessageFormated('error');
-
+  if (developers.length === 0)
+    return successFormatResponse({developers:[]},'create some developers');
+    
   const response: response = getResponse(developers);
-  return successFormatResponse(response, 'message');
+  return successFormatResponse(response, 'list of developers');
 };
 
 export default controller;

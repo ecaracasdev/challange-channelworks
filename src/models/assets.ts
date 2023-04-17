@@ -1,9 +1,9 @@
-import mongoose from 'mongoose';
+import mongoose, { Document }  from 'mongoose';
 
 // assets.ts
 export type AssetType = 'laptop' | 'keyboard' | 'mouse' | 'headset';
 
-export interface IAsset {
+export interface IAsset extends Document {
   brand: string;
   model: string;
   type: AssetType;
@@ -20,6 +20,7 @@ export const assetSchema = new mongoose.Schema(
     versionKey: false,
   }
 );
+
 const AssetModel = mongoose.model<IAsset>('Asset', assetSchema);
 
 export default AssetModel;
