@@ -27,7 +27,7 @@ export function responseMiddleware(
         status: 'success',
         data: data,
       };
-      res.json(responseData);
+      res.status(200).json(responseData);
     },
     error: (message: string, code: string) => {
       const responseData: ErrorResponse = {

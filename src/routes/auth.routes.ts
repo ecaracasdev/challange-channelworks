@@ -1,5 +1,6 @@
 import express from 'express';
 import login from '../controllers/auth/login';
+import { catcher } from '../core/core';
 
 const router = express.Router();
 
@@ -50,6 +51,6 @@ const router = express.Router();
  *                   description: A message indicating the login was unsuccessful
  *                   example: Invalid credentials
  */
-router.post('/login', login);
+router.post('/login', catcher(login));
 
 export default router;

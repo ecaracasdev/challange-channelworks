@@ -1,27 +1,23 @@
 import { Request, Response } from 'express';
 import jwt from 'jsonwebtoken';
+import { errorMessageFormated, successFormatResponse } from '../../core/core';
+import ConfigManager from '../../managers/config.manager';
 
 const adminUser = {
   username: 'admin',
-  password: 'password',
+  password: 'admin',
 };
 
-const controller = (req: Request, res: Response) => {
+const controller = async (req: Request, res: Response) => {
   const { username, password } = req.body;
-
+  const config = ConfigManager.currentConfig
   // Check if the username and password match the hardcoded credentials
   if (username === adminUser.username && password === adminUser.password) {
     // If the credentials match, create a JWT token with a secret key and set it as a response header
-    const token = jwt.sign({ username }, 'secretKey');
-    res.status(200).json({
-      message: 'Login successful',
-      token,
-    });
+    const token = jwt.sign({ username }, config.jwt.secretJwt);
+    return successFormatResponse({ token: token }, 'Login successful');
   } else {
-    // If the credentials don't match, send an error message
-    res.status(401).json({
-      message: 'Invalid credentials',
-    });
+    return errorMessageFormated({ message: 'Invalid credentials', code: 401 });
   }
 };
 

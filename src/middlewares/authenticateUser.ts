@@ -1,5 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 import jwt from 'jsonwebtoken';
+import ConfigManager from '../managers/config.manager';
 
 interface CustomRequest extends Request {
   user?: {
@@ -14,6 +15,7 @@ const authenticateUser = (
   next: NextFunction
 ) => {
   const authHeader = req.headers.authorization;
+  const config = ConfigManager.currentConfig;
 
   if (!authHeader) {
     return res.status(401).json({ message: 'Unauthorized' });
@@ -21,7 +23,7 @@ const authenticateUser = (
 
   const token = authHeader.split(' ')[1];
 
-  jwt.verify(token, process.env.SECRET_KEY || '' , (err, decoded) => {
+  jwt.verify(token, config.jwt.secretJwt, (err: any, decoded: any) => {
     if (err) {
       return res.status(403).json({ message: 'Forbidden' });
     }
