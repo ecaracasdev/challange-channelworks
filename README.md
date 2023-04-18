@@ -48,4 +48,4 @@ docker-compose up --build
 This command will build and start the container instances defined in docker-compose.yml file. Once the build process is complete, you should be able to access the application by navigating to http://localhost:[PORT_NUMBER] in your web browser.
 
 Usage
-[Instructions on how to use the project or applications features...]
+Instructions on how to use the project or applications can be found in the explanation document
