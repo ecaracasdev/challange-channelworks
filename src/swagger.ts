@@ -10,6 +10,10 @@ export const options = {
       {
         url: 'http://localhost:3000/api/',
       },
+      {
+        url: 'http://18.118.29.255:3000/api/'
+      }
+      ,
     ],
     components: {
       securitySchemes: {

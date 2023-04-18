@@ -1,5 +1,6 @@
 import express from 'express';
 import * as bodyParser from 'body-parser';
+import cors from 'cors';
 import apiRoutes from '../routes';
 // import responseMiddleware from '../middlewares/responseMiddleware';
 // import jwtMiddleware from '../middlewares/jwtMiddleware';
@@ -17,6 +18,7 @@ export default class ServerManager {
       const app = express();
 
       //Middlewares
+      app.use(cors());
       app.use(responseMiddleware);
       app.use(bodyParser.json({ limit: '50mb' }));
       app.use(
