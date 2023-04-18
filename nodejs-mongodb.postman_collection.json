@@ -21,10 +21,13 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:3000/api/auth/login",
+					"raw": "http://18.118.29.255:3000/api/auth/login",
 					"protocol": "http",
 					"host": [
-						"localhost"
+						"18",
+						"118",
+						"29",
+						"255"
 					],
 					"port": "3000",
 					"path": [
@@ -57,10 +60,13 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:3000/api/developers",
+					"raw": "http://18.118.29.255:3000/api/developers",
 					"protocol": "http",
 					"host": [
-						"localhost"
+						"18",
+						"118",
+						"29",
+						"255"
 					],
 					"port": "3000",
 					"path": [
@@ -90,10 +96,13 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "http://localhost:3000/api/developers",
+					"raw": "http://18.118.29.255:3000/api/developers",
 					"protocol": "http",
 					"host": [
-						"localhost"
+						"18",
+						"118",
+						"29",
+						"255"
 					],
 					"port": "3000",
 					"path": [
@@ -116,10 +125,13 @@
 					}
 				],
 				"url": {
-					"raw": "http://localhost:3000/api/developers/643d6ce8c3f671c2b8ec5228",
+					"raw": "http://18.118.29.255:3000/api/developers/643d6ce8c3f671c2b8ec5228",
 					"protocol": "http",
 					"host": [
-						"localhost"
+						"18",
+						"118",
+						"29",
+						"255"
 					],
 					"port": "3000",
 					"path": [
@@ -143,10 +155,13 @@
 					}
 				],
 				"url": {
-					"raw": "http://localhost:3000/api/assets",
+					"raw": "http://18.118.29.255:3000/api/assets",
 					"protocol": "http",
 					"host": [
-						"localhost"
+						"18",
+						"118",
+						"29",
+						"255"
 					],
 					"port": "3000",
 					"path": [
@@ -178,10 +193,13 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:3000/api/assets",
+					"raw": "http://18.118.29.255:3000/api/assets",
 					"protocol": "http",
 					"host": [
-						"localhost"
+						"18",
+						"118",
+						"29",
+						"255"
 					],
 					"port": "3000",
 					"path": [
@@ -204,10 +222,13 @@
 					}
 				],
 				"url": {
-					"raw": "http://localhost:3000/api/assets/6asdd",
+					"raw": "http://18.118.29.255:3000/api/assets/6asdd",
 					"protocol": "http",
 					"host": [
-						"localhost"
+						"18",
+						"118",
+						"29",
+						"255"
 					],
 					"port": "3000",
 					"path": [
@@ -231,10 +252,13 @@
 					}
 				],
 				"url": {
-					"raw": "http://localhost:3000/api/licenses",
+					"raw": "http://18.118.29.255:3000/api/licenses",
 					"protocol": "http",
 					"host": [
-						"localhost"
+						"18",
+						"118",
+						"29",
+						"255"
 					],
 					"port": "3000",
 					"path": [
@@ -266,10 +290,13 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:3000/api/licenses",
+					"raw": "http://18.118.29.255:3000/api/licenses",
 					"protocol": "http",
 					"host": [
-						"localhost"
+						"18",
+						"118",
+						"29",
+						"255"
 					],
 					"port": "3000",
 					"path": [
@@ -299,10 +326,13 @@
 					}
 				],
 				"url": {
-					"raw": "http://localhost:3000/api/licenses/643b3c0aad73fc3cd775cbd2",
+					"raw": "http://18.118.29.255:3000/api/licenses/643b3c0aad73fc3cd775cbd2",
 					"protocol": "http",
 					"host": [
-						"localhost"
+						"18",
+						"118",
+						"29",
+						"255"
 					],
 					"port": "3000",
 					"path": [
@@ -335,10 +365,13 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:3000/api/developers/643dcd67c6b7b1fb2e0f4939/assets-licenses",
+					"raw": "http://18.118.29.255:3000/api/developers/643dcd67c6b7b1fb2e0f4939/assets-licenses",
 					"protocol": "http",
 					"host": [
-						"localhost"
+						"18",
+						"118",
+						"29",
+						"255"
 					],
 					"port": "3000",
 					"path": [
@@ -363,21 +396,30 @@
 					}
 				],
 				"url": {
-					"raw": "http://localhost:3000/api/developers/643dcd67c6b7b1fb2e0f4939?property=assets",
+					"raw": "http://18.118.29.255:3000/api/developers/643eb86e3f27bcde41222425",
 					"protocol": "http",
 					"host": [
-						"localhost"
+						"18",
+						"118",
+						"29",
+						"255"
 					],
 					"port": "3000",
 					"path": [
 						"api",
 						"developers",
-						"643dcd67c6b7b1fb2e0f4939"
+						"643eb86e3f27bcde41222425"
 					],
 					"query": [
 						{
 							"key": "property",
-							"value": "assets"
+							"value": "assets",
+							"disabled": true
+						},
+						{
+							"key": "property",
+							"value": "licenses",
+							"disabled": true
 						}
 					]
 				}
