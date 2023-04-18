@@ -1,7 +1,7 @@
 import mongoose, { Document }  from 'mongoose';
 
 // assets.ts
-export type AssetType = 'laptop' | 'keyboard' | 'mouse' | 'headset';
+export type AssetType = 'laptop' | 'keyboard' | 'mouse' | 'headset' | 'monitor';
 
 export interface IAsset extends Document {
   brand: string;
