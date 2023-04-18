@@ -1,0 +1,388 @@
+{
+	"info": {
+		"_postman_id": "ec49c82e-5f3d-47ea-859e-ee9d18ecb9fb",
+		"name": "nodejs-mongodb",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "17562543"
+	},
+	"item": [
+		{
+			"name": "login user",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"username\": \"admin\",\r\n  \"password\": \"admin\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/auth/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create developer",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNjgxNzcxNzU2fQ.GLhOWrDgaO1_kzkUZPmBoJWl2Lk1gEhbSbnuXk-X1sY",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"fullname\": \"vvvv\",\r\n    \"active\": true,\r\n    \"assets\": [\r\n    ],\r\n    \"licenses\": [\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/developers",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"developers"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get developers",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNjgxNzY4NTU1fQ.9o2VWVjTWCiZqpIjLS-diRYYxhXvP9v25JXuN4r_BvY",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/developers",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"developers"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "set Developer Inactive",
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNjgxNTY5MTA4fQ.dFjWnWiwXyJIeNiaMHtlYQgcH1cYhH-L4sFGq-E_MmU",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:3000/api/developers/643d6ce8c3f671c2b8ec5228",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"developers",
+						"643d6ce8c3f671c2b8ec5228"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "list assets",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNjgxNzcxNzU2fQ.GLhOWrDgaO1_kzkUZPmBoJWl2Lk1gEhbSbnuXk-X1sY",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:3000/api/assets",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"assets"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create Assets",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNjgxNTY5MTA4fQ.dFjWnWiwXyJIeNiaMHtlYQgcH1cYhH-L4sFGq-E_MmU",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"brand\":\"asus\",\r\n    \"model\":\"phiro\",\r\n    \"type\":\"keyboard\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/assets",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"assets"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete Asset",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNjgxNTY5MTA4fQ.dFjWnWiwXyJIeNiaMHtlYQgcH1cYhH-L4sFGq-E_MmU",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:3000/api/assets/6asdd",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"assets",
+						"6asdd"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "list licenses",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNjgxNTY5MTA4fQ.dFjWnWiwXyJIeNiaMHtlYQgcH1cYhH-L4sFGq-E_MmU",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:3000/api/licenses",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"licenses"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create License",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNjgxNTY5MTA4fQ.dFjWnWiwXyJIeNiaMHtlYQgcH1cYhH-L4sFGq-E_MmU",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"software\": \"azure\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/licenses",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"licenses"
+					],
+					"query": [
+						{
+							"key": "Authorization",
+							"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNjgxNTY5MTA4fQ.dFjWnWiwXyJIeNiaMHtlYQgcH1cYhH-L4sFGq-E_MmU",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete License",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNjgxNTY5MTA4fQ.dFjWnWiwXyJIeNiaMHtlYQgcH1cYhH-L4sFGq-E_MmU",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:3000/api/licenses/643b3c0aad73fc3cd775cbd2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"licenses",
+						"643b3c0aad73fc3cd775cbd2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update Developer Assets or Licenses",
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNjgxNzcxNzU2fQ.GLhOWrDgaO1_kzkUZPmBoJWl2Lk1gEhbSbnuXk-X1sY",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"type\": \"asset\",\r\n    \"operation\": \"add\",\r\n    \"value\": [\r\n        {\r\n            \"assetId\": \"643b6f36204d70fd425f484e\"\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/developers/643dcd67c6b7b1fb2e0f4939/assets-licenses",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"developers",
+						"643dcd67c6b7b1fb2e0f4939",
+						"assets-licenses"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getDevById",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNjgxNzcxNzU2fQ.GLhOWrDgaO1_kzkUZPmBoJWl2Lk1gEhbSbnuXk-X1sY",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:3000/api/developers/643dcd67c6b7b1fb2e0f4939?property=assets",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"developers",
+						"643dcd67c6b7b1fb2e0f4939"
+					],
+					"query": [
+						{
+							"key": "property",
+							"value": "assets"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
